@@ -1,0 +1,12 @@
+{
+  "name": "ledgermem-pipedream",
+  "version": "0.1.0",
+  "description": "LedgerMem Pipedream components — sources and actions",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "echo 'lint placeholder' && find components -name '*.mjs' -exec node --check {} \\;",
+    "test": "node --test tests/"
+  },
+  "engines": { "node": ">=18" }
+}

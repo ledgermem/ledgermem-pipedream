@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Syntax-check every .mjs component
+        run: find components -name '*.mjs' -exec node --check {} +
+      - name: Validate component shape
+        run: |
+          set -e
+          for f in $(find components -name '*.mjs'); do
+            node -e "import('./$f').then(m => { const c = m.default; if (!c.key || !c.name || !c.version || !c.type) { console.error('Bad component:', '$f'); process.exit(1); } });" || exit 1
+          done

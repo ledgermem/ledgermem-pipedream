@@ -34,13 +34,24 @@ export default {
     const fresh = items.filter((m) => !lastSeen || m.createdAt > lastSeen);
     if (fresh.length === 0) return;
 
-    for (const item of fresh.reverse()) {
+    // Compute max BEFORE we sort/emit so cursor advancement is independent of
+    // the order the API returns items in.
+    const maxCreatedAt = fresh.reduce(
+      (acc, m) => (m.createdAt > acc ? m.createdAt : acc),
+      fresh[0].createdAt,
+    );
+
+    // Emit oldest-first so downstream consumers see chronological order.
+    const ordered = [...fresh].sort((a, b) =>
+      a.createdAt < b.createdAt ? -1 : a.createdAt > b.createdAt ? 1 : 0,
+    );
+    for (const item of ordered) {
       this.$emit(item, {
         id: item.id,
         summary: `Memory ${item.id}`,
         ts: Date.parse(item.createdAt) || Date.now(),
       });
     }
-    await this.db.set("lastSeen", fresh[fresh.length - 1].createdAt);
+    await this.db.set("lastSeen", maxCreatedAt);
   },
 };

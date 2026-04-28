@@ -64,10 +64,10 @@ export default {
       return this._makeRequest({ $, path: "/search", method: "POST", data: { query, limit, actorId } });
     },
     updateMemory({ id, content, metadata, $ }) {
-      return this._makeRequest({ $, path: `/memories/${id}`, method: "PATCH", data: { content, metadata } });
+      return this._makeRequest({ $, path: `/memories/${encodeURIComponent(id)}`, method: "PATCH", data: { content, metadata } });
     },
     deleteMemory({ id, $ }) {
-      return this._makeRequest({ $, path: `/memories/${id}`, method: "DELETE" });
+      return this._makeRequest({ $, path: `/memories/${encodeURIComponent(id)}`, method: "DELETE" });
     },
     listMemories({ limit, cursor, $ }) {
       return this._makeRequest({ $, path: "/memories", method: "GET", params: { limit, cursor } });

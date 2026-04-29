@@ -1,7 +1,7 @@
 {
-  "name": "ledgermem-pipedream",
+  "name": "getmnemo-pipedream",
   "version": "0.1.0",
-  "description": "LedgerMem Pipedream components — sources and actions",
+  "description": "Mnemo Pipedream components — sources and actions",
   "private": true,
   "type": "module",
   "scripts": {

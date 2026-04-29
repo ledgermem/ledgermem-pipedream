@@ -2,12 +2,12 @@ import { axios } from "@pipedream/platform";
 
 export default {
   type: "app",
-  app: "ledgermem",
+  app: "getmnemo",
   propDefinitions: {
     memoryId: {
       type: "string",
       label: "Memory ID",
-      description: "The LedgerMem memory ID (e.g. mem_01HXYZ).",
+      description: "The Mnemo memory ID (e.g. mem_01HXYZ).",
     },
     content: {
       type: "string",
@@ -38,14 +38,14 @@ export default {
   },
   methods: {
     _baseUrl() {
-      return "https://api.proofly.dev/v1";
+      return "https://api.getmnemo.xyz/v1";
     },
     _headers() {
       return {
         "Authorization": `Bearer ${this.$auth.api_key}`,
         "x-workspace-id": this.$auth.workspace_id,
         "Content-Type": "application/json",
-        "User-Agent": "ledgermem-pipedream/0.1.0",
+        "User-Agent": "getmnemo-pipedream/0.1.0",
       };
     },
     async _makeRequest({ $, path, method = "GET", data, params }) {

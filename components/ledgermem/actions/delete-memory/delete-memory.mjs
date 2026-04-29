@@ -1,17 +1,17 @@
-import ledgermem from "../../ledgermem.app.mjs";
+import getmnemo from "../../getmnemo.app.mjs";
 
 export default {
-  key: "ledgermem-delete-memory",
+  key: "getmnemo-delete-memory",
   name: "Delete Memory",
   description: "Permanently deletes a memory by ID.",
   version: "0.1.0",
   type: "action",
   props: {
-    ledgermem,
-    id: { propDefinition: [ledgermem, "memoryId"] },
+    getmnemo,
+    id: { propDefinition: [getmnemo, "memoryId"] },
   },
   async run({ $ }) {
-    await this.ledgermem.deleteMemory({ $, id: this.id });
+    await this.getmnemo.deleteMemory({ $, id: this.id });
     $.export("$summary", `Deleted memory ${this.id}`);
     return { id: this.id, deleted: true };
   },

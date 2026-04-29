@@ -1,19 +1,19 @@
-import ledgermem from "../../ledgermem.app.mjs";
+import getmnemo from "../../getmnemo.app.mjs";
 
 export default {
-  key: "ledgermem-add-memory",
+  key: "getmnemo-add-memory",
   name: "Add Memory",
-  description: "Stores a new memory in LedgerMem. [See docs](https://docs.proofly.dev/api#add-memory)",
+  description: "Stores a new memory in Mnemo. [See docs](https://docs.getmnemo.xyz/api#add-memory)",
   version: "0.1.0",
   type: "action",
   props: {
-    ledgermem,
-    content: { propDefinition: [ledgermem, "content"] },
-    metadata: { propDefinition: [ledgermem, "metadata"] },
-    actorId: { propDefinition: [ledgermem, "actorId"] },
+    getmnemo,
+    content: { propDefinition: [getmnemo, "content"] },
+    metadata: { propDefinition: [getmnemo, "metadata"] },
+    actorId: { propDefinition: [getmnemo, "actorId"] },
   },
   async run({ $ }) {
-    const result = await this.ledgermem.addMemory({
+    const result = await this.getmnemo.addMemory({
       $,
       content: this.content,
       metadata: this.metadata,

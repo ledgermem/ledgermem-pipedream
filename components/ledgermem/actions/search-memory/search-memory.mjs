@@ -1,19 +1,19 @@
-import ledgermem from "../../ledgermem.app.mjs";
+import getmnemo from "../../getmnemo.app.mjs";
 
 export default {
-  key: "ledgermem-search-memory",
+  key: "getmnemo-search-memory",
   name: "Search Memory",
   description: "Semantic search across the workspace memory store.",
   version: "0.1.0",
   type: "action",
   props: {
-    ledgermem,
-    query: { propDefinition: [ledgermem, "query"] },
-    limit: { propDefinition: [ledgermem, "limit"] },
-    actorId: { propDefinition: [ledgermem, "actorId"] },
+    getmnemo,
+    query: { propDefinition: [getmnemo, "query"] },
+    limit: { propDefinition: [getmnemo, "limit"] },
+    actorId: { propDefinition: [getmnemo, "actorId"] },
   },
   async run({ $ }) {
-    const result = await this.ledgermem.searchMemory({
+    const result = await this.getmnemo.searchMemory({
       $,
       query: this.query,
       limit: this.limit,
